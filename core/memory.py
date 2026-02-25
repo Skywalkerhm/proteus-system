@@ -199,13 +199,26 @@ class SemanticMemory(MemoryLayer):
         """根据技能需求匹配 Agent"""
         matched = []
         for filepath in self.agents_path.glob("*.json"):
-            with open(filepath, 'r', encoding='utf-8') as f:
-                profile = json.load(f)
-                skills = profile.get("skills", [])
-                # 计算匹配度
-                match_score = len(set(required_skills) & set(skills)) / len(required_skills) if required_skills else 0
-                if match_score > 0:
-                    matched.append((match_score, profile))
+            # 跳过索引文件
+            if filepath.name == "agents_index.json":
+                continue
+            
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    profile = json.load(f)
+                    
+                    # 确保是字典格式（兼容旧数据）
+                    if isinstance(profile, list):
+                        continue
+                    
+                    skills = profile.get("skills", [])
+                    # 计算匹配度
+                    match_score = len(set(required_skills) & set(skills)) / len(required_skills) if required_skills else 0
+                    if match_score > 0:
+                        matched.append((match_score, profile))
+            except Exception as e:
+                print(f"⚠️ 读取 Agent 文件失败 {filepath.name}: {e}")
+                continue
         
         # 按匹配度排序
         matched.sort(key=lambda x: -x[0])
