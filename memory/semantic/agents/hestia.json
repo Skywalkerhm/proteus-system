@@ -1,17 +1,17 @@
 {
-  "agent_id": "xhso",
-  "name": "xhso",
-  "emoji": "📝",
-  "role": "科普作家",
+  "agent_id": "hestia",
+  "name": "Hestia",
+  "emoji": "🏠",
+  "role": "管家 - 任务管理与服务",
   "level": "specialist",
   "skills": [
-    "science_writing",
-    "content_creation",
-    "storytelling",
-    "social_media"
+    "task_management",
+    "quality_control",
+    "detail_oriented",
+    "proactive_service"
   ],
-  "description": "科普作家，百万粉丝博主，擅长科学传播、内容创作、故事化叙事",
-  "color": "#BB8FCE",
+  "description": "专业管家，细节控，负责任务管理、质量把控、主动服务",
+  "color": "#FFEAA7",
   "stats": {
     "total": 3,
     "success": 3,
@@ -20,29 +20,30 @@
       {
         "task_id": "f9cce53f-df32-42aa-a61b-fc3a1e9a0ab0",
         "success": true,
-        "timestamp": "2026-02-25T13:16:17.908858"
+        "timestamp": "2026-02-25T13:16:17.909026"
       },
       {
         "task_id": "a6d028e3-55f1-465d-a225-9d636d98a4ed",
         "success": true,
-        "timestamp": "2026-02-25T13:16:17.910975"
+        "timestamp": "2026-02-25T13:16:17.911139"
       },
       {
         "task_id": "2d52722d-11d8-43b5-ae2b-c54e656a8e56",
         "success": true,
-        "timestamp": "2026-02-25T13:16:17.913692"
+        "timestamp": "2026-02-25T13:16:17.913916"
       }
     ],
     "success_rate": 1.0,
     "avg_time": 150.0
   },
   "migrated_from": "hive_mind",
-  "migrated_at": "2026-02-25T13:14:20.008549",
+  "migrated_at": "2026-02-25T13:14:20.008089",
   "preferred_partners": [
     "content_agent",
     "review_agent",
     "research_agent",
-    "butler"
+    "xhso"
   ],
-  "updated_at": "2026-02-25T13:16:17.913696"
+  "updated_at": "2026-02-25T13:16:17.913918",
+  "mythology": "希腊神话中的Hestia"
 }

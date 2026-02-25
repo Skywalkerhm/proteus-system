@@ -1,8 +1,8 @@
 {
-  "agent_id": "code_agent",
-  "name": "Code Agent",
-  "emoji": "💻",
-  "role": "编程专家",
+  "agent_id": "daedalus",
+  "name": "Daedalus",
+  "emoji": "🏛️",
+  "role": "代码专家 - 架构设计",
   "skills": [
     "coding",
     "debugging",
@@ -15,5 +15,6 @@
     "success": 0,
     "total_time": 0
   },
-  "updated_at": "2026-02-25T13:16:20.446611"
+  "updated_at": "2026-02-25T13:16:20.446611",
+  "mythology": "希腊神话中的Daedalus"
 }

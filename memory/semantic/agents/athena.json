@@ -1,8 +1,8 @@
 {
-  "agent_id": "research_agent",
-  "name": "Research Agent",
-  "emoji": "🔬",
-  "role": "研究专家",
+  "agent_id": "athena",
+  "name": "Athena",
+  "emoji": "🦉",
+  "role": "研究专家 - 智慧分析",
   "skills": [
     "research",
     "analysis",
@@ -15,5 +15,6 @@
     "success": 0,
     "total_time": 0
   },
-  "updated_at": "2026-02-25T13:16:20.446364"
+  "updated_at": "2026-02-25T13:16:20.446364",
+  "mythology": "希腊神话中的Athena"
 }

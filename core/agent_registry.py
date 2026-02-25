@@ -1,108 +1,145 @@
 #!/usr/bin/env python3
 """
-🤖 Proteus Agent Registry - 复制 OpenClaw Agent 画像
+🏛️ Olympus Agent Registry - 希腊神话 Agent 画像
 
-从 OpenClaw/Hive Mind 复制现有 Agent 能力画像到 Proteus 语义记忆
+所有 Agent 基于希腊神话人物命名
 """
 
-import json
 from pathlib import Path
 from datetime import datetime
 
-# Hive Mind Agent 数据源
-# 注意：使用前需要配置实际路径
-HIVE_MIND_DATA = Path(__file__).parent.parent.parent / "hive-mind-data"
-
-def load_hive_mind_agents():
-    """从 Hive Mind 加载 Agent 数据"""
-    # 从 dashboard 或 tasks.json 中提取 Agent 信息
-    agents = {
-        "echo": {
-            "agent_id": "echo",
-            "name": "Echo",
-            "emoji": "🎤",
-            "role": "Hub - 意图理解与任务分发",
-            "level": "hub",
-            "skills": ["intent_analysis", "task_decomposition", "agent_matching", "coordination"],
-            "description": "中央调度器，负责任务接收、解析、分派和结果整合",
-            "color": "#FF6B6B",
-            "stats": {"total": 0, "success": 0, "total_time": 0}
-        },
-        "elon": {
-            "agent_id": "elon",
-            "name": "Elon",
-            "emoji": "🚀",
-            "role": "CTO - 技术决策",
-            "level": "spoke",
-            "skills": ["architecture", "technical_decision", "innovation", "risk_assessment"],
-            "description": "技术决策者，负责架构设计、技术选型、风险评估",
-            "color": "#4ECDC4",
-            "stats": {"total": 0, "success": 0, "total_time": 0}
-        },
-        "henry": {
-            "agent_id": "henry",
-            "name": "Henry",
-            "emoji": "📈",
-            "role": "CMO - 市场策略",
-            "level": "spoke",
-            "skills": ["marketing", "branding", "growth_strategy", "user_analysis"],
-            "description": "市场策略专家，负责品牌建设、增长策略、用户分析",
-            "color": "#45B7D1",
-            "stats": {"total": 0, "success": 0, "total_time": 0}
-        },
-        "butler": {
-            "agent_id": "butler",
-            "name": "Butler",
-            "emoji": "🤵",
-            "role": "管家",
-            "level": "specialist",
-            "skills": ["task_management", "quality_control", "detail_oriented", "proactive_service"],
-            "description": "专业管家，细节控，负责任务管理、质量把控、主动服务",
-            "color": "#FFEAA7",
-            "stats": {"total": 0, "success": 0, "total_time": 0}
-        },
-            "agent_id": "xhso",
-            "name": "xhso",
-            "emoji": "📝",
-            "role": "科普作家",
-            "level": "specialist",
-            "skills": ["science_writing", "content_creation", "storytelling", "social_media"],
-            "description": "科普作家，百万粉丝博主，擅长科学传播、内容创作、故事化叙事",
-            "color": "#BB8FCE",
-            "stats": {"total": 0, "success": 0, "total_time": 0}
-        }
+# 希腊神话 Agent 列表
+OLYMPUS_AGENTS = {
+    "echo": {
+        "agent_id": "echo",
+        "name": "Echo",
+        "emoji": "🎤",
+        "role": "Hub - 意图理解与任务分发",
+        "level": "hub",
+        "skills": ["intent_analysis", "task_decomposition", "agent_matching", "coordination"],
+        "description": "回声女神，善于传递信息和协调各方",
+        "color": "#FF6B6B",
+        "mythology": "希腊神话中的回声女神"
+    },
+    "hermes": {
+        "agent_id": "hermes",
+        "name": "Hermes",
+        "emoji": "🚀",
+        "role": "CTO - 技术决策",
+        "level": "spoke",
+        "skills": ["architecture", "technical_decision", "innovation", "risk_assessment"],
+        "description": "众神使者，聪明机智，技术高超",
+        "color": "#4ECDC4",
+        "mythology": "希腊神话中的众神使者"
+    },
+    "aphrodite": {
+        "agent_id": "aphrodite",
+        "name": "Aphrodite",
+        "emoji": "💫",
+        "role": "CMO - 市场策略",
+        "level": "spoke",
+        "skills": ["marketing", "branding", "growth_strategy", "user_analysis"],
+        "description": "爱与美之神，善于吸引和影响",
+        "color": "#45B7D1",
+        "mythology": "希腊神话中的爱与美之神"
+    },
+    "hestia": {
+        "agent_id": "hestia",
+        "name": "Hestia",
+        "emoji": "🏠",
+        "role": "管家 - 任务管理与服务",
+        "level": "specialist",
+        "skills": ["task_management", "quality_control", "detail_oriented", "proactive_service"],
+        "description": "家庭与炉灶女神，稳定可靠",
+        "color": "#FFEAA7",
+        "mythology": "希腊神话中的家庭女神"
+    },
+    "hephaestus": {
+        "agent_id": "hephaestus",
+        "name": "Hephaestus",
+        "emoji": "🔨",
+        "role": "全栈工程师 - 系统构建",
+        "level": "specialist",
+        "skills": ["full_stack_development", "system_architecture", "tool_creation", "debugging"],
+        "description": "火与工匠之神，创造力最强",
+        "color": "#F7DC6F",
+        "mythology": "希腊神话中的工匠之神"
+    },
+    "muse": {
+        "agent_id": "muse",
+        "name": "Muse",
+        "emoji": "✨",
+        "role": "科普作家 - 灵感创作",
+        "level": "specialist",
+        "skills": ["science_writing", "content_creation", "storytelling", "inspiration"],
+        "description": "缪斯女神，灵感与艺术的源泉",
+        "color": "#BB8FCE",
+        "mythology": "希腊神话中的缪斯女神"
+    },
+    "athena": {
+        "agent_id": "athena",
+        "name": "Athena",
+        "emoji": "🦉",
+        "role": "研究专家 - 智慧分析",
+        "level": "specialist",
+        "skills": ["scientific_research", "data_analysis", "strategic_thinking", "pattern_recognition"],
+        "description": "智慧女神，善于分析和战略思考",
+        "color": "#98D8C8",
+        "mythology": "希腊神话中的智慧女神"
+    },
+    "apollo": {
+        "agent_id": "apollo",
+        "name": "Apollo",
+        "emoji": "☀️",
+        "role": "内容专家 - 艺术创作",
+        "level": "specialist",
+        "skills": ["content_creation", "artistic_expression", "communication", "storytelling"],
+        "description": "艺术与光明之神，善于表达和创作",
+        "color": "#FFD700",
+        "mythology": "希腊神话中的艺术之神"
+    },
+    "daedalus": {
+        "agent_id": "daedalus",
+        "name": "Daedalus",
+        "emoji": "🏛️",
+        "role": "代码专家 - 架构设计",
+        "level": "specialist",
+        "skills": ["code_architecture", "complex_systems", "algorithm_design", "optimization"],
+        "description": "传奇工匠，善于建造复杂结构",
+        "color": "#DDA0DD",
+        "mythology": "希腊神话中的传奇工匠"
+    },
+    "themis": {
+        "agent_id": "themis",
+        "name": "Themis",
+        "emoji": "⚖️",
+        "role": "审核专家 - 质量把控",
+        "level": "specialist",
+        "skills": ["quality_assurance", "code_review", "standard_enforcement", "feedback"],
+        "description": "正义与秩序女神，公正严谨",
+        "color": "#96CEB4",
+        "mythology": "希腊神话中的正义女神"
     }
-    return agents
+}
 
-def migrate_to_proteus():
-    """迁移 Agent 到 Proteus 语义记忆"""
-    # 加载 Hive Mind Agent
-    agents = load_hive_mind_agents()
-    
-    # Proteus 语义记忆路径
-    proteus_semantic = Path(__file__).parent.parent / "memory" / "semantic" / "agents"
-    proteus_semantic.mkdir(parents=True, exist_ok=True)
-    
-    # 保存每个 Agent
-    for agent_id, profile in agents.items():
-        profile["migrated_from"] = "hive_mind"
+def get_all_agents():
+    """获取所有 Agent"""
+    return OLYMPUS_AGENTS
+
+def get_agent(agent_id: str):
+    """获取单个 Agent"""
+    return OLYMPUS_AGENTS.get(agent_id)
+
+def register_to_memory(semantic_memory):
+    """注册到语义记忆"""
+    for agent_id, profile in OLYMPUS_AGENTS.items():
         profile["migrated_at"] = datetime.now().isoformat()
-        
-        filepath = proteus_semantic / f"{agent_id}.json"
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(profile, f, indent=2, ensure_ascii=False)
-        
-        print(f"✅ 迁移 Agent: {agent_id} ({profile['name']})")
-    
-    # 更新索引
-    index_path = proteus_semantic.parent / "agents_index.json"
-    with open(index_path, 'w', encoding='utf-8') as f:
-        json.dump(list(agents.keys()), f, indent=2, ensure_ascii=False)
-    
-    print(f"\n🎉 完成！共迁移 {len(agents)} 个 Agent 到 Proteus System")
-    print(f"📁 存储位置：{proteus_semantic}")
-    
-    return agents
+        semantic_memory.register_agent(agent_id, profile)
+    print(f"🏛️ 已注册 {len(OLYMPUS_AGENTS)} 个 Olympus Agent")
 
 if __name__ == "__main__":
-    migrate_to_proteus()
+    print("🏛️ Olympus System - Agent Registry")
+    print("=" * 50)
+    for agent_id, info in OLYMPUS_AGENTS.items():
+        print(f"   {info['emoji']} {info['name']} - {info['role']}")
+    print(f"\n总计：{len(OLYMPUS_AGENTS)} 个 Agent")
