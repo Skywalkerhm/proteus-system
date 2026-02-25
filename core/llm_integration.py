@@ -501,6 +501,88 @@ class LLMClient:
         }
 
 
+class ExecutionLogger:
+    """执行日志记录器"""
+    
+    def __init__(self, log_path: Path):
+        self.log_path = log_path
+        self.log_path.mkdir(parents=True, exist_ok=True)
+        print(f"📝 执行日志系统已初始化：{log_path}")
+    
+    def start_task(self, task_id: str, task_desc: str, claw_info: Dict):
+        log_entry = {
+            "event": "task_start",
+            "task_id": task_id,
+            "task_desc": task_desc,
+            "claw_info": claw_info,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def log_subtask_start(self, task_id: str, subtask: Dict, agent_id: str):
+        log_entry = {
+            "event": "subtask_start",
+            "subtask_id": subtask.get("subtask_id"),
+            "subtask_desc": subtask.get("desc"),
+            "agent_id": agent_id,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def log_subtask_complete(self, task_id: str, subtask_id: str, result: Dict):
+        log_entry = {
+            "event": "subtask_complete",
+            "subtask_id": subtask_id,
+            "result": result,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def log_decision(self, task_id: str, decision_type: str, decision: str, rationale: str):
+        log_entry = {
+            "event": "decision",
+            "decision_type": decision_type,
+            "decision": decision,
+            "rationale": rationale,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def log_exception(self, task_id: str, error: str, resolution: str = None):
+        log_entry = {
+            "event": "exception",
+            "error": error,
+            "resolution": resolution,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def complete_task(self, task_id: str, result: Dict, feedback: str = None):
+        log_entry = {
+            "event": "task_complete",
+            "result": result,
+            "feedback": feedback,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save_log(task_id, log_entry)
+    
+    def _save_log(self, task_id: str, log_entry: Dict):
+        log_file = self.log_path / f"{task_id}.jsonl"
+        with open(log_file, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
+    
+    def get_task_logs(self, task_id: str) -> List[Dict]:
+        log_file = self.log_path / f"{task_id}.jsonl"
+        if not log_file.exists():
+            return []
+        
+        logs = []
+        with open(log_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                logs.append(json.loads(line))
+        return logs
+
+
 if __name__ == "__main__":
     # 测试 LLM 集成
     print("🧠 Olympus LLM Integration Test")
