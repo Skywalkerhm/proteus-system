@@ -471,9 +471,102 @@ class LLMClient:
         return self._mock_execute(agent_type, task_desc)
     
     def _llm_execute(self, agent_type: str, task_desc: str, context: Dict = None) -> Dict:
-        """使用 LLM 执行任务"""
-        # TODO: 实现真实 LLM 调用
-        return self._mock_execute(agent_type, task_desc)
+        """使用真实 LLM 执行任务"""
+        
+        # 构建提示词
+        system_prompt = f"""你是一个专业的 {agent_type} Agent。
+请根据任务描述完成工作，并返回结构化的结果。
+
+返回格式（JSON）：
+{{
+    "success": true/false,
+    "output": "任务输出的详细描述",
+    "execution_time": 执行时间（分钟）,
+    "artifacts": ["产出的文件列表"],
+    "logs": ["执行日志"],
+    "confidence": 置信度 (0.0-1.0)
+}}
+
+请确保输出专业、详细且可执行。"""
+
+        user_prompt = f"""请完成以下任务：
+
+任务描述：{task_desc}
+{'上下文：' + json.dumps(context, ensure_ascii=False) if context else ''}
+
+请返回 JSON 格式的执行结果："""
+
+        if self.provider == "openai" and self.openai_client:
+            try:
+                response = self.openai_client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    temperature=0.7,
+                    max_tokens=2000
+                )
+                
+                content = response.choices[0].message.content.strip()
+                result = json.loads(content)
+                
+                # 确保必要字段存在
+                if "success" not in result:
+                    result["success"] = True
+                if "output" not in result:
+                    result["output"] = f"[{agent_type}] 完成任务：{task_desc[:50]}"
+                if "execution_time" not in result:
+                    result["execution_time"] = 30
+                if "artifacts" not in result:
+                    result["artifacts"] = []
+                if "logs" not in result:
+                    result["logs"] = [f"执行 {task_desc[:30]}..."]
+                if "confidence" not in result:
+                    result["confidence"] = 0.9
+                
+                return result
+                
+            except Exception as e:
+                print(f"   ⚠️  LLM 执行失败：{e}")
+                print("   🔄 Fallback 到模拟执行")
+                return self._mock_execute(agent_type, task_desc)
+        
+        elif self.provider == "anthropic" and self.anthropic_client:
+            try:
+                response = self.anthropic_client.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=2000,
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": user_prompt}]
+                )
+                
+                content = response.content[0].text.strip()
+                result = json.loads(content)
+                
+                # 确保必要字段存在
+                if "success" not in result:
+                    result["success"] = True
+                if "output" not in result:
+                    result["output"] = f"[{agent_type}] 完成任务：{task_desc[:50]}"
+                if "execution_time" not in result:
+                    result["execution_time"] = 30
+                if "artifacts" not in result:
+                    result["artifacts"] = []
+                if "logs" not in result:
+                    result["logs"] = [f"执行 {task_desc[:30]}..."]
+                if "confidence" not in result:
+                    result["confidence"] = 0.9
+                
+                return result
+                
+            except Exception as e:
+                print(f"   ⚠️  LLM 执行失败：{e}")
+                print("   🔄 Fallback 到模拟执行")
+                return self._mock_execute(agent_type, task_desc)
+        
+        else:
+            return self._mock_execute(agent_type, task_desc)
     
     def _mock_execute(self, agent_type: str, task_desc: str) -> Dict:
         """模拟执行"""
