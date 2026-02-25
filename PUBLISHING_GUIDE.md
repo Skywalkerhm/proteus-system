@@ -101,7 +101,7 @@ proteus-system/
 
 ```bash
 # 1. 进入项目目录
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 
 # 2. 初始化 Git
 git init
@@ -236,7 +236,7 @@ pip install proteus-system
 
 **立即发布**:
 ```bash
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 ./publish_to_github.sh  # 创建此脚本后运行
 ```
 

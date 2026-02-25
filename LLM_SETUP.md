@@ -19,7 +19,7 @@
 ### 1. 安装依赖
 
 ```bash
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 pip install -r requirements.txt
 ```
 
@@ -79,7 +79,7 @@ OLYMPUS_LLM_PROVIDER=mock
 ### 测试 LLM 集成
 
 ```bash
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 python3 core/llm_integration.py
 ```
 

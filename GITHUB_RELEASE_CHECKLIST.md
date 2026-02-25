@@ -47,7 +47,7 @@
 ### 1. 本地验证
 
 ```bash
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 
 # 安装依赖
 pip install -r requirements.txt
@@ -77,7 +77,7 @@ python demo_evolution.py
 ### 3. 推送代码
 
 ```bash
-cd /Volumes/Soul/Proteus_Genesis
+cd <project-root>
 
 # 初始化 Git
 git init
