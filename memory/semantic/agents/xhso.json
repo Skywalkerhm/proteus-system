@@ -1,0 +1,48 @@
+{
+  "agent_id": "xhso",
+  "name": "xhso",
+  "emoji": "📝",
+  "role": "科普作家",
+  "level": "specialist",
+  "skills": [
+    "science_writing",
+    "content_creation",
+    "storytelling",
+    "social_media"
+  ],
+  "description": "科普作家，百万粉丝博主，擅长科学传播、内容创作、故事化叙事",
+  "color": "#BB8FCE",
+  "stats": {
+    "total": 3,
+    "success": 3,
+    "total_time": 450,
+    "tasks": [
+      {
+        "task_id": "f9cce53f-df32-42aa-a61b-fc3a1e9a0ab0",
+        "success": true,
+        "timestamp": "2026-02-25T13:16:17.908858"
+      },
+      {
+        "task_id": "a6d028e3-55f1-465d-a225-9d636d98a4ed",
+        "success": true,
+        "timestamp": "2026-02-25T13:16:17.910975"
+      },
+      {
+        "task_id": "2d52722d-11d8-43b5-ae2b-c54e656a8e56",
+        "success": true,
+        "timestamp": "2026-02-25T13:16:17.913692"
+      }
+    ],
+    "success_rate": 1.0,
+    "avg_time": 150.0
+  },
+  "migrated_from": "hive_mind",
+  "migrated_at": "2026-02-25T13:14:20.008549",
+  "preferred_partners": [
+    "content_agent",
+    "review_agent",
+    "research_agent",
+    "butler"
+  ],
+  "updated_at": "2026-02-25T13:16:17.913696"
+}

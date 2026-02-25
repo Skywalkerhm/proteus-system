@@ -1,0 +1,80 @@
+{
+  "pattern_id": "social_media_content_plan",
+  "name": "社交媒体内容计划生成",
+  "description": "为创业团队或品牌生成一周/一月的社交媒体内容规划",
+  "version": "1.0",
+  "created_at": "2026-02-25",
+  
+  "task_template": {
+    "input": "为一个小型创业团队生成一周的社交媒体内容计划",
+    "output": "7 天的社交媒体内容日历，包含平台、主题、文案、配图建议"
+  },
+  
+  "subtasks": [
+    {
+      "subtask_id": "st_1",
+      "desc": "调研目标受众和行业趋势",
+      "required_skills": ["research", "analysis"],
+      "assigned_agent": "research_agent",
+      "estimated_time": 45,
+      "deliverable": "受众画像 + 竞品分析报告"
+    },
+    {
+      "subtask_id": "st_2",
+      "desc": "确定内容主题和发布节奏",
+      "required_skills": ["planning", "strategy"],
+      "assigned_agent": "content_agent",
+      "estimated_time": 30,
+      "deliverable": "内容主题日历"
+    },
+    {
+      "subtask_id": "st_3",
+      "desc": "撰写每日文案草稿",
+      "required_skills": ["writing", "copywriting", "social_media"],
+      "assigned_agent": "content_agent",
+      "estimated_time": 90,
+      "deliverable": "7 天文案草稿"
+    },
+    {
+      "subtask_id": "st_4",
+      "desc": "设计配图建议和视觉风格",
+      "required_skills": ["design", "visual"],
+      "assigned_agent": "content_agent",
+      "estimated_time": 60,
+      "deliverable": "视觉风格指南 + 配图建议"
+    },
+    {
+      "subtask_id": "st_5",
+      "desc": "质量审核与优化",
+      "required_skills": ["review", "quality_control"],
+      "assigned_agent": "review_agent",
+      "estimated_time": 30,
+      "deliverable": "审核报告 + 优化建议"
+    }
+  ],
+  
+  "recommended_claw": {
+    "members": ["content_agent", "research_agent", "review_agent"],
+    "lead_agent": "content_agent",
+    "rationale": "内容创作为主，需要研究支持和质量审核"
+  },
+  
+  "best_practices": [
+    "内容主题应与品牌定位一致",
+    "发布节奏考虑目标受众活跃时间",
+    "文案风格符合平台特性（微博/小红书/抖音等）",
+    "预留热点跟进的灵活空间",
+    "包含明确的 CTA（行动号召）"
+  ],
+  
+  "quality_checklist": [
+    "✓ 7 天内容无重复主题",
+    "✓ 每条文案有明确目标",
+    "✓ 配图建议清晰可执行",
+    "✓ 包含互动引导",
+    "✓ 符合品牌调性"
+  ],
+  
+  "estimated_total_time": 255,
+  "success_criteria": "用户满意度≥4/5，内容可直接使用或微调后发布"
+}

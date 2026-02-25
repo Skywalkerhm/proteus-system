@@ -1,0 +1,12 @@
+{
+  "rule_id": "collaboration_protocol",
+  "name": "协作协议",
+  "description": "Agent 间通信和协作的基本规则",
+  "content": [
+    "1. 所有 Agent 通信必须通过 Hub 或在工作群内公开",
+    "2. 遇到障碍立即上报，不得隐瞒",
+    "3. 任务完成后必须提交执行报告",
+    "4. 跨 Agent 依赖需提前声明"
+  ],
+  "updated_at": "2026-02-25T13:16:20.446941"
+}

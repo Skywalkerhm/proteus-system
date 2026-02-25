@@ -1,0 +1,19 @@
+{
+  "agent_id": "content_agent",
+  "name": "Content Agent",
+  "emoji": "✍️",
+  "role": "内容专家",
+  "skills": [
+    "writing",
+    "editing",
+    "copywriting",
+    "social_media"
+  ],
+  "description": "擅长文案创作、内容策划、社交媒体运营",
+  "stats": {
+    "total": 0,
+    "success": 0,
+    "total_time": 0
+  },
+  "updated_at": "2026-02-25T13:16:20.446736"
+}
